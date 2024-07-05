@@ -1,0 +1,13 @@
+[package]
+name = "csr"
+version = "0.1.0"
+edition = "2021"
+
+[workspace]
+
+members = ["csr", "csr_derive", "csr_macro"]
+
+[dependencies]
+csr_derive = { path = "csr_derive" }
+csr_macro = { path = "csr_macro" }
+csr = { path = "csr" }
