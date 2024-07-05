@@ -5,9 +5,9 @@ edition = "2021"
 
 [workspace]
 
-members = ["csr", "csr_derive", "csr_macro"]
+members = ["csr_trait", "csr_derive", "csr_macro"]
 
 [dependencies]
 csr_derive = { path = "csr_derive" }
 csr_macro = { path = "csr_macro" }
-csr = { path = "csr" }
+csr_trait = { path = "csr_trait" }
