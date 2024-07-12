@@ -42,12 +42,13 @@ pub fn CSRRW(input: TokenStream) -> TokenStream {
     let arg2 = p.next().unwrap();
     eprintln!("arg2 {:?}", arg2);
 
-    let instr_str = format!("csrrw {{0}}, {}, x0", quote!(#arg1).to_string());
+    let instr_str = format!("csrrw {{0}}, {}, {{1}}", quote!(#arg1).to_string());
     eprintln!("instr_str {:?}", instr_str);
 
     let instr_str = format!(
-        "core::arch::asm!({:?}, out(reg) r_out, in(reg) r_in);",
-        instr_str
+        "core::arch::asm!({:?}, out(reg) r_out, in(reg) {});",
+        instr_str,
+        quote!(#arg2).to_string()
     );
 
     eprintln!("instr_str {:?}", instr_str);
@@ -56,14 +57,11 @@ pub fn CSRRW(input: TokenStream) -> TokenStream {
 
     eprintln!("expr: instr_str {:?}", instr_str);
 
-    // let instr_str = quote!(core::arch::asm!("csrrs {0}, 0x0, x0", out(reg) r_out, in(reg) r_in););
+    // let instr_str = quote!(core::arch::asm!("csrrw {0}, 0x0, {1}", out(reg) r_out, in(reg) r););
 
     quote!({
         // comment
         let r_out: usize;
-        let r_in: usize = 0;
-        // core::arch::asm!("csrrs {0}, 0x0, x0", out(reg) r_out, in(reg) r_in);
-        // core::arch::asm!(#instr_str, out(reg) r_out, in(reg) r_in);
         #instr_str
         r_out
     })

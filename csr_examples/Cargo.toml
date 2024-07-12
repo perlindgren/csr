@@ -1,0 +1,7 @@
+[package]
+name = "csr_examples"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hippomenes-rt = { git = "https://github.com/onsdagens/hippomenes-core" }
