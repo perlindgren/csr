@@ -2,7 +2,7 @@
 #![no_main]
 
 use core::panic::PanicInfo;
-use csr_examples::*;
+use csr::*;
 use hippomenes_rt::entry;
 
 #[panic_handler]
@@ -43,13 +43,13 @@ fn main() -> ! {
     unsafe { csrci!(0x100, 0x10) };
 
     // Read and write with immediate
-    let r = unsafe { csrrwi!(0x100, 0x10) };
+    let _r = unsafe { csrrwi!(0x100, 0x10) };
 
     // Read and set with immediate
-    let r = unsafe { csrrsi!(0x100, 0x10) };
+    let _r = unsafe { csrrsi!(0x100, 0x10) };
 
     // Read and clear with immediate
-    let r = unsafe { csrrci!(0x100, 0x10) };
+    let _r = unsafe { csrrci!(0x100, 0x10) };
 
     loop {}
 }

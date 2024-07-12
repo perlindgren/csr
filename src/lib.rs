@@ -1,5 +1,9 @@
 #![no_std]
 
+/// Low-Level CSR access macros:
+/// See latest: https://riscv.org/technical/specifications/
+/// Implementation based on Volume 1, Unprivileged Specification
+///
 #[macro_export]
 macro_rules! csrr {
     ($csr_number:literal) => {

@@ -5,6 +5,14 @@
         "CSRRS",
         "CSRRSI",
         "CSRRW",
-        "CSRRWI"
+        "CSRRWI",
+        "csrci",
+        "csrr",
+        "csrs",
+        "csrsi",
+        "csrw",
+        "csrwi",
+        "objdump",
+        "sstatus"
     ]
 }
