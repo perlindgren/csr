@@ -1,4 +1,5 @@
 #![no_std]
+#![feature(asm_const)]
 
 /// Low-Level CSR access macros:
 /// See latest: https://riscv.org/technical/specifications/
@@ -108,12 +109,14 @@ macro_rules! csrwi {
     ($csr_number:literal, $immediate: expr) => {
         /// Writes the CSR with immediate
         {
-            core::arch::asm!(concat!(
-                "csrwi ",
-                stringify!($csr_number),
-                ", ",
-                stringify!($immediate)
-            ));
+            core::arch::asm!(
+                concat!(
+                    "csrwi ",
+                    stringify!($csr_number),
+                    ", {imm}"
+                ),
+                imm = const $immediate
+            );
         }
     };
 }

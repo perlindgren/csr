@@ -1,5 +1,6 @@
 #![no_std]
 #![no_main]
+#![feature(asm_const)]
 
 use core::panic::PanicInfo;
 use csr::*;
@@ -8,6 +9,11 @@ use hippomenes_rt::entry;
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
     loop {}
+}
+
+const X: u8 = 5;
+const fn gen_x() -> u8 {
+    5
 }
 
 #[entry]
@@ -35,6 +41,8 @@ fn main() -> ! {
 
     // Write with immediate
     unsafe { csrwi!(0x100, 0x10) };
+    unsafe { csrwi!(0x100, X) };
+    unsafe { csrwi!(0x100, gen_x()) };
 
     // Set with immediate
     unsafe { csrsi!(0x100, 0x10) };
