@@ -103,17 +103,17 @@ macro_rules! csrrc {
     };
 }
 
+pub use const_format::concatcp;
+
 #[macro_export]
 macro_rules! csrwi {
     ($csr_number:literal, $immediate: expr) => {
         /// Writes the CSR with immediate
         {
-            core::arch::asm!(concat!(
-                "csrwi ",
-                stringify!($csr_number),
-                ", ",
-                stringify!($immediate)
-            ));
+            use csr::concatcp;
+            const t: u8 = $immediate;
+            const csr_number: u16 = $csr_number;
+            concatcp!("core::arch::asm!(\"csrwi ", csr_number, ", ", t, "\")");
         }
     };
 }

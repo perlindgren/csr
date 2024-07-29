@@ -10,6 +10,10 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
+const fn x() -> u8 {
+    5
+}
+
 #[entry]
 fn main() -> ! {
     // Read CSR
@@ -34,7 +38,7 @@ fn main() -> ! {
     let r = unsafe { csrrc!(0x100, r) };
 
     // Write with immediate
-    unsafe { csrwi!(0x100, 0x10) };
+    unsafe { csrwi!(0x100, x()) };
 
     // Set with immediate
     unsafe { csrsi!(0x100, 0x10) };
