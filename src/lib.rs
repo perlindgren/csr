@@ -104,6 +104,8 @@ macro_rules! csrrc {
     };
 }
 
+pub use const_format::concatcp;
+
 #[macro_export]
 macro_rules! csrwi {
     ($csr_number:expr, $immediate: expr) => {
