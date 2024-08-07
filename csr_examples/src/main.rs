@@ -1,5 +1,6 @@
 #![no_std]
 #![no_main]
+#![feature(asm_const)]
 
 use core::panic::PanicInfo;
 use csr::*;
@@ -10,7 +11,8 @@ fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
-const fn x() -> u8 {
+const X: u8 = 5;
+const fn gen_x() -> u8 {
     5
 }
 
@@ -35,10 +37,12 @@ fn main() -> ! {
     let r = unsafe { csrrs!(0x100, r) };
 
     // Read and clear CSR with register
-    let r = unsafe { csrrc!(0x100, r) };
+    let _ = unsafe { csrrc!(0x100, r) };
 
     // Write with immediate
-    unsafe { csrwi!(0x100, x()) };
+    unsafe { csrwi!(0x100, 0x10) };
+    unsafe { csrwi!(0x100, X) };
+    unsafe { csrwi!(0x100, gen_x()) };
 
     // Set with immediate
     unsafe { csrsi!(0x100, 0x10) };
