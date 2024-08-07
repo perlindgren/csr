@@ -208,7 +208,7 @@ fn main() -> ! {
     register_write!(p.some_peripheral.some_reg, y);
     register_write!(p.some_peripheral.some_reg, gen_y());
 
-    let z = unsafe { core::ptr::read(0x00000000 as *const u32) };
+    let z = unsafe { core::ptr::read(0x13370000 as *const u32) };
     // z is unknown so this should end up as non-immediate
     register_write!(p.some_peripheral.some_reg, z);
     loop {}
