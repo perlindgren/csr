@@ -204,6 +204,7 @@ fn main() -> ! {
     p.some_peripheral.some_reg.write(y);
     p.some_peripheral.some_reg.write(gen_y());
 
+    let z = unsafe { core::ptr::read(0x13370000 as *const u32) };
     // z is unknown so this should end up as non-immediate
     p.some_peripheral.some_reg.write(z);
 
