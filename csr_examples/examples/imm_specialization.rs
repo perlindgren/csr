@@ -145,26 +145,7 @@ impl CSR for SomeReg {
         unsafe { csrrw!(0x100, val) };
     }
 }
-/*
-impl<'a, SomeReg> CSR for &'a mut SomeReg
-where
-    SomeReg: CSR,
-{
-    const ADDR: u16 = 0x100;
 
-    /// Writes to the register via immediate instruction.
-    fn write_const<const N: u32>(&mut self) {
-        unsafe { csrwi!(SomeReg::ADDR, N) };
-    }
-
-    /// Writes to the register via non-immediate instruction.
-    // todo: change the csrrw! macro to accept a const address
-    fn write_rt(&mut self, val: u32) {
-        let val = val as i32;
-        unsafe { csrrw!(0x100, val) };
-    }
-}
-*/
 impl SomeReg {
     fn write(&mut self, val: u32) {
         util::write_reg(self, val);
@@ -211,5 +192,20 @@ fn main() -> ! {
     let z = unsafe { core::ptr::read(0x13370000 as *const u32) };
     // z is unknown so this should end up as non-immediate
     register_write!(p.some_peripheral.some_reg, z);
+
+    // all of these are statically known so should end up as immediate
+    p.some_peripheral.some_reg.write(1);
+    p.some_peripheral.some_reg.write(x);
+    p.some_peripheral.some_reg.write(X);
+    p.some_peripheral.some_reg.write(gen_x());
+
+    // all of these are statically known but out of range so should end up as non-immediate
+    p.some_peripheral.some_reg.write(32);
+    p.some_peripheral.some_reg.write(y);
+    p.some_peripheral.some_reg.write(gen_y());
+
+    // z is unknown so this should end up as non-immediate
+    p.some_peripheral.some_reg.write(z);
+
     loop {}
 }
