@@ -106,16 +106,15 @@ macro_rules! csrrc {
 
 #[macro_export]
 macro_rules! csrwi {
-    ($csr_number:literal, $immediate: expr) => {
+    ($csr_number:expr, $immediate: expr) => {
         /// Writes the CSR with immediate
         {
             core::arch::asm!(
                 concat!(
-                    "csrwi ",
-                    stringify!($csr_number),
-                    ", {imm}"
+                    "csrwi {csr}, {imm}"
                 ),
-                imm = const $immediate
+                imm = const $immediate,
+                csr = const $csr_number
             );
         }
     };

@@ -37,7 +37,7 @@ fn main() -> ! {
     let r = unsafe { csrrs!(0x100, r) };
 
     // Read and clear CSR with register
-    let r = unsafe { csrrc!(0x100, r) };
+    let _ = unsafe { csrrc!(0x100, r) };
 
     // Write with immediate
     unsafe { csrwi!(0x100, 0x10) };
