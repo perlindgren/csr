@@ -187,7 +187,7 @@ macro_rules! csrsi {
         {
             core::arch::asm!(
                 concat!(
-                    "csrwi {csr}, {imm}"
+                    "csrsi {csr}, {imm}"
                 ),
                 imm = const $immediate,
                 csr = const $csr_number
@@ -203,7 +203,7 @@ macro_rules! csrrsi {
         {
             let r: usize;
             core::arch::asm!(
-                concat!("csrrwi {0}, {csr}, {imm}"),
+                concat!("csrrsi {0}, {csr}, {imm}"),
                 out(reg) r,
                 imm = const $immediate,
                 csr = const $csr_number
