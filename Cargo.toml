@@ -15,5 +15,5 @@ const_format = "0.2.32"
 # csr_trait = { path = "csr_trait" }
 # csr_examples = { path = "csr_examples" }
 
-[toolchain]
-channel = "nightly"
+# [toolchain]
+# channel = "nightly"

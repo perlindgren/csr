@@ -63,34 +63,36 @@ fn main() -> ! {
 Each CSR operation expands to RV32I assembly as seen by:
 
 ```shell
-cargo objdump  --release -- -S > csr_ex.objdump
+cargo objdump --release --example low_level_access -- -d > low_level_access.objdump
 ```
 
 ```assembly
 00000074 <main>:
-      74: 73 25 00 10  	csrr	a0, sstatus
-      78: 73 10 05 10  	csrw	sstatus, a0
-      7c: 73 20 05 10  	csrs	sstatus, a0
-      80: 73 30 05 10  	csrc	sstatus, a0
-      84: f3 15 05 10  	csrrw	a1, sstatus, a0
-      88: 73 a5 05 10  	csrrs	a0, sstatus, a1
-      8c: f3 35 05 10  	csrrc	a1, sstatus, a0
-      90: 73 50 08 10  	csrwi	sstatus, 0x10
-      94: 73 60 08 10  	csrsi	sstatus, 0x10
-      98: 73 70 08 10  	csrci	sstatus, 0x10
-      9c: 73 55 08 10  	csrrwi	a0, sstatus, 0x10
-      a0: 73 65 08 10  	csrrsi	a0, sstatus, 0x10
-      a4: 73 75 08 10  	csrrci	a0, sstatus, 0x10
-      a8: 6f 00 00 00  	j	0xa8 <main+0x34>
+      74: 10002573     	csrr	a0, sstatus
+      78: 10051073     	csrw	sstatus, a0
+      7c: 10052073     	csrs	sstatus, a0
+      80: 10053073     	csrc	sstatus, a0
+      84: 100515f3     	csrrw	a1, sstatus, a0
+      88: 1005a573     	csrrs	a0, sstatus, a1
+      8c: 100535f3     	csrrc	a1, sstatus, a0
+      90: 10085073     	csrwi	sstatus, 0x10
+      94: 1002d073     	csrwi	sstatus, 0x5
+      98: 1002d073     	csrwi	sstatus, 0x5
+      9c: 10086073     	csrsi	sstatus, 0x10
+      a0: 10087073     	csrci	sstatus, 0x10
+      a4: 10085573     	csrrwi	a0, sstatus, 0x10
+      a8: 10086573     	csrrsi	a0, sstatus, 0x10
+      ac: 10087573     	csrrci	a0, sstatus, 0x10
+      b0: 0000006f     	j	0xb0 <main+0x3c>
 ```
 
 The macro expansions can be observed by:
 
 ```shell
-cargo expand > exp.rs
+cargo expand --example low_level_access > exp_low_level_acccess.rs
 ```
 
-The expanded `exp.rs` will contain:
+The expanded `exp_low_level_access.rs` will contain:
 
 ```rust
 ...
@@ -100,7 +102,7 @@ pub fn __risc_v_rt__main() -> ! {
     let r: usize = unsafe {
         {
             let r: usize;
-            asm!("csrr {0}, 0x100", out(reg) r);
+            asm!("csrr {0}, {1}", out(reg) r, const 0x100);
             r
         }
     };

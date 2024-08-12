@@ -1,0 +1,143 @@
+warning: unknown and unstable feature specified for `-Ctarget-feature`: `zmmul`
+  |
+  = note: it is still passed through to the codegen backend, but use of this feature might be unsound and the behavior of this feature can change in the future
+  = help: consider filing a feature request
+
+warning: 1 warning emitted
+
+warning: unknown and unstable feature specified for `-Ctarget-feature`: `zmmul`
+  |
+  = note: it is still passed through to the codegen backend, but use of this feature might be unsound and the behavior of this feature can change in the future
+  = help: consider filing a feature request
+
+warning: 1 warning emitted
+
+warning: unknown and unstable feature specified for `-Ctarget-feature`: `zmmul`
+  |
+  = note: it is still passed through to the codegen backend, but use of this feature might be unsound and the behavior of this feature can change in the future
+  = help: consider filing a feature request
+
+warning: 1 warning emitted
+
+
+imm_specialization:	file format elf32-littleriscv
+
+Disassembly of section .text:
+
+00000000 <_start>:
+       0: 50001197     	auipc	gp, 0x50001
+       4: 80018193     	addi	gp, gp, -0x800
+
+00000008 <.Lpcrel_hi1>:
+       8: 50001317     	auipc	t1, 0x50001
+       c: ff830313     	addi	t1, t1, -0x8
+      10: ff037113     	andi	sp, t1, -0x10
+
+00000014 <.Lpcrel_hi2>:
+      14: 50000297     	auipc	t0, 0x50000
+      18: fec28293     	addi	t0, t0, -0x14
+
+0000001c <.Lpcrel_hi3>:
+      1c: 50000397     	auipc	t2, 0x50000
+      20: fe438393     	addi	t2, t2, -0x1c
+
+00000024 <.Lpcrel_hi4>:
+      24: 50000317     	auipc	t1, 0x50000
+      28: fdc30313     	addi	t1, t1, -0x24
+      2c: 0072fc63     	bgeu	t0, t2, 0x44 <.Lpcrel_hi5>
+      30: 00032e03     	lw	t3, 0x0(t1)
+      34: 00430313     	addi	t1, t1, 0x4
+      38: 01c2a023     	sw	t3, 0x0(t0)
+      3c: 00428293     	addi	t0, t0, 0x4
+      40: fe72e8e3     	bltu	t0, t2, 0x30 <.Lpcrel_hi4+0xc>
+
+00000044 <.Lpcrel_hi5>:
+      44: 50000297     	auipc	t0, 0x50000
+      48: fbc28293     	addi	t0, t0, -0x44
+
+0000004c <.Lpcrel_hi6>:
+      4c: 50000397     	auipc	t2, 0x50000
+      50: fb438393     	addi	t2, t2, -0x4c
+      54: 0072f863     	bgeu	t0, t2, 0x64 <.Lpcrel_hi6+0x18>
+      58: 0002a023     	sw	zero, 0x0(t0)
+      5c: 00428293     	addi	t0, t0, 0x4
+      60: fe72ece3     	bltu	t0, t2, 0x58 <.Lpcrel_hi6+0xc>
+      64: 00000097     	auipc	ra, 0x0
+      68: 0e4080e7     	jalr	0xe4(ra) <_setup_interrupts>
+      6c: 0080006f     	j	0x74 <main>
+
+00000070 <DefaultHandler>:
+      70: 0000006f     	j	0x70 <DefaultHandler>
+
+00000074 <main>:
+      74: 1000d073     	csrwi	sstatus, 0x1
+      78: 10015073     	csrwi	sstatus, 0x2
+      7c: 1001d073     	csrwi	sstatus, 0x3
+      80: 10025073     	csrwi	sstatus, 0x4
+      84: 02000513     	li	a0, 0x20
+      88: 10051073     	csrw	sstatus, a0
+      8c: 10051073     	csrw	sstatus, a0
+      90: 02100593     	li	a1, 0x21
+      94: 10059073     	csrw	sstatus, a1
+      98: 13370637     	lui	a2, 0x13370
+      9c: 00062603     	lw	a2, 0x0(a2)
+      a0: 10061073     	csrw	sstatus, a2
+      a4: 1000e073     	csrsi	sstatus, 0x1
+      a8: 10016073     	csrsi	sstatus, 0x2
+      ac: 1001e073     	csrsi	sstatus, 0x3
+      b0: 10026073     	csrsi	sstatus, 0x4
+      b4: 10052073     	csrs	sstatus, a0
+      b8: 10052073     	csrs	sstatus, a0
+      bc: 1005a073     	csrs	sstatus, a1
+      c0: 10062073     	csrs	sstatus, a2
+      c4: 1000f073     	csrci	sstatus, 0x1
+      c8: 10017073     	csrci	sstatus, 0x2
+      cc: 1001f073     	csrci	sstatus, 0x3
+      d0: 10027073     	csrci	sstatus, 0x4
+      d4: 10053073     	csrc	sstatus, a0
+      d8: 10053073     	csrc	sstatus, a0
+      dc: 1005b073     	csrc	sstatus, a1
+      e0: 10063073     	csrc	sstatus, a2
+      e4: 1000d6f3     	csrrwi	a3, sstatus, 0x1
+      e8: 100156f3     	csrrwi	a3, sstatus, 0x2
+      ec: 1001d6f3     	csrrwi	a3, sstatus, 0x3
+      f0: 100256f3     	csrrwi	a3, sstatus, 0x4
+      f4: 100516f3     	csrrw	a3, sstatus, a0
+      f8: 100516f3     	csrrw	a3, sstatus, a0
+      fc: 100596f3     	csrrw	a3, sstatus, a1
+     100: 100616f3     	csrrw	a3, sstatus, a2
+     104: 1000e6f3     	csrrsi	a3, sstatus, 0x1
+     108: 100166f3     	csrrsi	a3, sstatus, 0x2
+     10c: 1001e6f3     	csrrsi	a3, sstatus, 0x3
+     110: 100266f3     	csrrsi	a3, sstatus, 0x4
+     114: 100526f3     	csrrs	a3, sstatus, a0
+     118: 100526f3     	csrrs	a3, sstatus, a0
+     11c: 1005a6f3     	csrrs	a3, sstatus, a1
+     120: 100626f3     	csrrs	a3, sstatus, a2
+     124: 1000f6f3     	csrrci	a3, sstatus, 0x1
+     128: 100176f3     	csrrci	a3, sstatus, 0x2
+     12c: 1001f6f3     	csrrci	a3, sstatus, 0x3
+     130: 100276f3     	csrrci	a3, sstatus, 0x4
+     134: 100536f3     	csrrc	a3, sstatus, a0
+     138: 100536f3     	csrrc	a3, sstatus, a0
+     13c: 1005b573     	csrrc	a0, sstatus, a1
+     140: 10063573     	csrrc	a0, sstatus, a2
+     144: 0000006f     	j	0x144 <main+0xd0>
+
+00000148 <_setup_interrupts>:
+     148: 00000537     	lui	a0, 0x0
+     14c: 17c50513     	addi	a0, a0, 0x17c
+     150: 00255513     	srli	a0, a0, 0x2
+     154: b00515f3     	csrrw	a1, mcycle, a0
+     158: 00000537     	lui	a0, 0x0
+     15c: 17c50513     	addi	a0, a0, 0x17c
+     160: 00255513     	srli	a0, a0, 0x2
+     164: b01515f3     	csrrw	a1, 0xb01, a0
+     168: 00000537     	lui	a0, 0x0
+     16c: 17c50513     	addi	a0, a0, 0x17c
+     170: 00255513     	srli	a0, a0, 0x2
+     174: b02515f3     	csrrw	a1, minstret, a0
+     178: 00008067     	ret
+
+0000017c <Interrupt2>:
+     17c: 0000006f     	j	0x17c <Interrupt2>

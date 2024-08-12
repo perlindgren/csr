@@ -1,9 +1,7 @@
 #![no_std]
 #![no_main]
-#![allow(internal_features)]
-#![feature(core_intrinsics)]
 
-use core::{intrinsics::is_val_statically_known, marker::PhantomData, panic::PanicInfo};
+use core::{marker::PhantomData, panic::PanicInfo};
 use csr_trait::CSR;
 use hippomenes_rt::entry;
 

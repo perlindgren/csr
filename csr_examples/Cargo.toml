@@ -3,10 +3,8 @@ name = "csr_examples"
 version = "0.1.0"
 edition = "2021"
 
-[no_test]
-
 [dependencies]
 hippomenes-rt = { git = "https://github.com/onsdagens/hippomenes-core" }
 csr = { path = ".." }
-csr_trait = {path = "../csr_trait"}
+csr_trait = { path = "../csr_trait" }
 static_assertions = "1.1.0"

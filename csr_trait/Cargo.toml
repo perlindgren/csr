@@ -6,5 +6,5 @@ edition = "2021"
 [dependencies]
 csr = { path = ".." }
 
-[toolchain]
-channel = "nightly"
+# [toolchain]
+# channel = "nightly"
